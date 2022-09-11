@@ -1,0 +1,63 @@
+// C++ Program to implement the
+// above approach
+#include <bits/stdc++.h>
+using namespace std;
+
+// Function to check if a given array can
+// be split into subsets of K consecutive
+// elements
+bool groupInKConsecutive(vector<int>& arr,
+						int K)
+{
+	// Stores the frequencies of
+	// array elements
+	map<int, int> count;
+
+	for (int h : arr) {
+		++count[h];
+	}
+
+	// Traverse the map
+	for (auto c : count) {
+		int cur = c.first;
+		int n = c.second;
+
+		// Check if all its occurrences can
+		// be grouped into K subsets
+		if (n > 0) {
+
+			// Traverse next K elements
+			for (int i = 1; i < K; ++i) {
+
+				// If the element is not
+				// present in the array
+				if (!count.count(cur + i)) {
+					return false;
+				}
+
+				count[cur + i] -= n;
+
+				// If it cannot be split into
+				// required number of subsets
+				if (count[cur + i] < 0)
+					return false;
+			}
+		}
+	}
+
+	return true;
+}
+
+// Driver Code
+int main()
+{
+	vector<int> arr = { 1, 2, 3, 6, 2,
+						3, 4, 7, 8 };
+	int k = 3;
+	if (groupInKConsecutive(arr, k)) {
+		cout << "True";
+	}
+	else {
+		cout << "False";
+	}
+}
