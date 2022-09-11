@@ -1,3 +1,4 @@
+//https://www.youtube.com/watch?v=DOHvkZ7QpAM
 #include <iostream>
 #include <unordered_map>
 using namespace std;
@@ -26,7 +27,7 @@ class snapShotArray
     }
     int get(int index, int snap_id)
     {
-        while(snap_id >= 0 && !(u_map[index].find(snap_id) == u_map[index].end()))
+        while(snap_id >= 0 && !u_map[index].at(snap_id))//!(u_map[index].find(snap_id) == u_map[index].end()))
         {
             snap_id--;
             if(snap_id == -1)
@@ -39,9 +40,12 @@ class snapShotArray
 };
 int main() {
 	snapShotArray s_arr = snapShotArray(3);
+	
 	s_arr.set(0,5);
 	s_arr.snap();
 	s_arr.set(0,6);
-	cout << s_arr.get(0,1);
+	s_arr.snap();
+	s_arr.set(0,7);
+	cout << s_arr.get(0,2);
 	return 0;
 }
