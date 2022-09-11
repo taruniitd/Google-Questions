@@ -1,5 +1,4 @@
-// C++ Program to implement the
-// above approach
+//https://www.geeksforgeeks.org/check-if-an-array-can-be-split-into-subsets-of-k-consecutive-elements/
 #include <bits/stdc++.h>
 using namespace std;
 
