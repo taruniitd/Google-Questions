@@ -1,0 +1,47 @@
+#include <iostream>
+#include <unordered_map>
+using namespace std;
+class snapShotArray
+{
+    public:
+    
+    int sid = 0;
+    unordered_map<int,int> u_map[3];
+    snapShotArray(int len)
+    {
+        //u_map = new unordered_map<int,int>;
+        for(int i = 0; i < len; i++)
+        {
+            u_map[i].insert({0,0});
+        }
+    }
+    void set(int index, int val)
+    {
+        u_map[index].insert({sid,val});
+    }
+    int snap()
+    {
+        sid++;
+        return sid - 1;
+    }
+    int get(int index, int snap_id)
+    {
+        while(snap_id >= 0 && !(u_map[index].find(snap_id) == u_map[index].end()))
+        {
+            snap_id--;
+            if(snap_id == -1)
+            {
+                return 0;
+            }
+        }
+        return u_map[index].at(snap_id);
+    }
+};
+int main() {
+	snapShotArray s_arr = snapShotArray(3);
+	s_arr.set(0,5);
+	s_arr.snap();
+	s_arr.set(0,6);
+	cout << s_arr.get(0,1);
+	return 0;
+}
